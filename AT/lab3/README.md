@@ -10,8 +10,8 @@ Translator Title (Optional):
 Antonyms Translator
 Extra Info (Optional):
 Please convert all words that have antonyms to their antonyms
-_______
-**Annotation for Lab3:**
+
+Annotation for Lab3:
 
 This implementation recreates the idea of “translation drift” by sequentially translating a sentence through 
 a chain of randomly selected languages before returning to the original language. Repeated machine translation 
