@@ -8,7 +8,6 @@ def load_gpt2():
     tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
     model = GPT2LMHeadModel.from_pretrained("gpt2").to(device).eval()
 
-    # GPT-2 изначально не имеет pad_token, нужен для generate()
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
         tokenizer.pad_token_id = tokenizer.eos_token_id
