@@ -15,13 +15,13 @@ import pyLDAvis
 import pyLDAvis.gensim_models
 import os
 
-# ----- 1. Load Excel -----
+# 1. Load Excel
 path = "/Users/tatianakhaidukova/Documents/GitHub/NLP2/wikiarticles.xlsx"
 papers = pd.read_excel(path)
 
 documents = papers['text'].astype(str).tolist()
 
-# ----- 2. Text preprocessing -----
+# 2. Text preprocessing
 stop_words = set(stopwords.words('english'))
 lemmatizer = WordNetLemmatizer()
 
@@ -38,10 +38,10 @@ tokenized_docs = [preprocess(doc) for doc in documents]
 # Convert token lists back to strings
 clean_docs = [' '.join(tokens) for tokens in tokenized_docs]
 
-# ----- 3. Add clean_docs column to the dataframe -----
+# 3. Add clean_docs column to the dataframe
 papers['clean_docs'] = clean_docs
 
-# Now you can join all processed texts
+# Join all processed texts
 long_string = ','.join(papers['clean_docs'].values)
 
 # Create a WordCloud object
@@ -89,13 +89,13 @@ print(corpus[:1][0][:30])
 
 
 if __name__ == "__main__":
-    # создаём dictionary и corpus
+    # make dictionary and corpus
     id2word = corpora.Dictionary(data_words)
     id2word.filter_extremes(no_below=5, no_above=0.5)
     texts = data_words
     corpus = [id2word.doc2bow(text) for text in texts]
 
-    # запускаем LDA
+    # launch LDA
     lda_model = gensim.models.LdaMulticore(
         corpus=corpus,
         id2word=id2word,
@@ -104,11 +104,11 @@ if __name__ == "__main__":
         random_state=42
     )
 
-    # выводим топ-слова
+    # show top words
     for idx, topic in lda_model.print_topics(-1):
         print(f"Topic {idx}: {topic}")
 
-    num_topics = 3  # добавили переменную
+    num_topics = 3  # add the variable 
 
     os.makedirs('./results', exist_ok=True)
 
